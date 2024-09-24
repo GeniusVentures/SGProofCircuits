@@ -7,16 +7,18 @@
 #define SGPROOFGENERATOR_HPP
 
 #include <nil/crypto3/algebra/curves/pallas.hpp>
-#include <nil/crypto3/zk/snark.hpp>
-#include <nil/crypto3/zk/snark/ppzksnark/r1cs_gg_ppzksnark.hpp>
+
+#include <nil/crypto3/zk/snark/systems/ppzksnark/r1cs_gg_ppzksnark.hpp>
 
 using namespace nil::crypto3::algebra::curves;
 using namespace nil::crypto3::zk::snark;
 
 typedef r1cs_gg_ppzksnark_proof<pallas> proof_type;
-typedef r1cs_gg_ppzksnark_keypair<pallas> keypair_type;
-typedef r1cs_gg_ppzksnark_primary_input<pallas> primary_input_type;
-typedef r1cs_gg_ppzksnark_auxiliary_input<pallas> auxiliary_input_type;
+//typedef r1cs_gg_ppzksnark_keypair<pallas> keypair_type;
+typedef nil::crypto3::zk::snark::detail::r1cs_gg_ppzksnark_basic_policy<pallas> basic_policy_type;
+typedef basic_policy_type::keypair_type keypair_type;
+typedef basic_policy_type::primary_input_type primary_input_type;
+typedef basic_policy_type::auxiliary_input_type  auxiliary_input_type;
 
 class SGProofGenerator {
 public:

@@ -3,7 +3,7 @@
  * @brief    Implement the SGProofGenerator class with functions for generating proofs
  */
 
-#include "SGProofGenerator.hpp"
+#include "SGGenerateProofs.hpp"
 
 proof_type SGProofGenerator::generate_genesis_proof_with_flags(
     keypair_type& keypair,
