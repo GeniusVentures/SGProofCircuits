@@ -120,13 +120,13 @@ function(add_circuit_no_stdlib name)
         list(APPEND INCLUDE_DIRS_LIST "-I${include_dir}")
     endforeach()
 
-    list(APPEND INCLUDE_DIRS_LIST -I${_THIRDPARTY_BUILD_DIR}/stdlib/lib/c++/v1 -I${_THIRDPARTY_BUILD_DIR}/circifier/lib/clang/17/include -I${_THIRDPARTY_BUILD_DIR}/stdlib/lib/libc)
+    list(APPEND INCLUDE_DIRS_LIST -I${_THIRDPARTY_BUILD_DIR}/stdlib/lib/c++/v1 -I${_THIRDPARTY_BUILD_DIR}/circifier/src/circifier-build/lib/clang/17/include/ -I${_THIRDPARTY_BUILD_DIR}/stdlib/lib/libc)
 
     list(REMOVE_DUPLICATES INCLUDE_DIRS_LIST)
 
     set(link_options "-S")
 
-    set(CLANG ${CMAKE_C_COMPILER})
+    set(CLANG "${_THIRDPARTY_BUILD_DIR}/circifier/bin/clang")
     set(LINKER "${_THIRDPARTY_BUILD_DIR}/circifier/bin/llvm-link")
 
     # Compile sources
@@ -135,13 +135,17 @@ function(add_circuit_no_stdlib name)
 
     foreach(source ${CIRCUIT_SOURCES})
         get_filename_component(source_base_name ${source} NAME)
+        set(compile_command "${CLANG} -target assigner -Xclang -fpreserve-vec3-type -Werror=unknown-attributes -D_LIBCPP_ENABLE_CXX17_REMOVED_UNARY_BINARY_FUNCTION
+        -D__ZKLLVM__ ${INCLUDE_DIRS_LIST} -emit-llvm -O1 -S ${ARG_COMPILER_OPTIONS}  -o ${name}_${source_base_name}.ll ${source}")
+        message(WARNING "The compilation command is:  ${compile_command}")
+
         add_custom_target(${name}_${source_base_name}_ll
-            COMMAND ${CLANG} -target assigner -Xclang -fpreserve-vec3-type -Werror=unknown-attributes -D_LIBCPP_ENABLE_CXX17_REMOVED_UNARY_BINARY_FUNCTION
-            -D__ZKLLVM__ ${INCLUDE_DIRS_LIST} -emit-llvm -O1 -S ${ARG_COMPILER_OPTIONS} -o ${name}_${source_base_name}.ll ${source}
+                        COMMAND ${CLANG} -target assigner -Xclang -fpreserve-vec3-type -Werror=unknown-attributes -D_LIBCPP_ENABLE_CXX17_REMOVED_UNARY_BINARY_FUNCTION
+                        -D__ZKLLVM__ ${INCLUDE_DIRS_LIST} -emit-llvm -O1 -S ${ARG_COMPILER_OPTIONS}  -o ${name}_${source_base_name}.ll ${source}
 
-            VERBATIM COMMAND_EXPAND_LISTS
+                        VERBATIM COMMAND_EXPAND_LISTS
 
-            SOURCES ${source})
+                        SOURCES ${source})
         add_dependencies(${name}_compile_sources ${name}_${source_base_name}_ll)
         list(APPEND compiler_outputs "${name}_${source_base_name}.ll")
     endforeach()
@@ -159,9 +163,9 @@ function(add_circuit)
     list(PREPEND ARGV ${circuit_name}_no_stdlib)
     add_circuit_no_stdlib(${ARGV})
 
-    set(LINKER $<TARGET_FILE:llvm-link>)
+    set(LINKER "${_THIRDPARTY_BUILD_DIR}/circifier/bin/llvm-link")
     set(libc_stdlib ${_THIRDPARTY_BUILD_DIR}/stdlib/lib/zkllvm/zkllvm-libc.ll)
-    set(libcpp_stdlib ${_THIRDPARTY_BUILD_DIR}/stdlib/lib/zkllvm/zkllvm-libcpp.ll))
+    set(libcpp_stdlib ${_THIRDPARTY_BUILD_DIR}/stdlib/lib/zkllvm/zkllvm-libcpp.ll)
     set(link_options "-S")
 
     add_custom_target(${circuit_name}
@@ -169,7 +173,5 @@ function(add_circuit)
         DEPENDS ${circuit_name}_no_stdlib
         VERBATIM COMMAND_EXPAND_LISTS)
 
-    if(${ZKLLVM_DEV_ENVIRONMENT})
-        add_dependencies(${circuit_name} zkllvm-libc zkllvm-libcpp)
-    endif()
+    #add_dependencies(${circuit_name} zkllvm-libc zkllvm-libcpp)
 endfunction(add_circuit)
