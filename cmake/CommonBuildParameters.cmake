@@ -1,8 +1,10 @@
 include(${CMAKE_CURRENT_LIST_DIR}/functions.cmake)
+
 # BOOST VERSION TO USE
 set(BOOST_MAJOR_VERSION "1" CACHE STRING "Boost Major Version")
 set(BOOST_MINOR_VERSION "85" CACHE STRING "Boost Minor Version")
 set(BOOST_PATCH_VERSION "0" CACHE STRING "Boost Patch Version")
+
 # convenience settings
 set(BOOST_VERSION "${BOOST_MAJOR_VERSION}.${BOOST_MINOR_VERSION}.${BOOST_PATCH_VERSION}")
 set(BOOST_VERSION_2U "${BOOST_MAJOR_VERSION}_${BOOST_MINOR_VERSION}")
@@ -12,7 +14,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 if(DEFINED USE_BOOST_INCLUDE_POSTFIX)
-  set(BOOST_INCLUDE_POSTFIX "/boost-${BOOST_VERSION_2U}" CACHE STRING "Boost include postfix")
+        set(BOOST_INCLUDE_POSTFIX "/boost-${BOOST_VERSION_2U}" CACHE STRING "Boost include postfix")
 endif()
 
 # --------------------------------------------------------
@@ -22,6 +24,7 @@ set(GTest_INCLUDE_DIR "${_THIRDPARTY_BUILD_DIR}/GTest/include")
 find_package(GTest CONFIG REQUIRED)
 include_directories(${GTest_INCLUDE_DIR})
 add_compile_definitions(CRYPTO3_CODEC_BASE58)
+
 # Boost should be loaded before libp2p v0.1.2
 # --------------------------------------------------------
 # Set config of Boost project
@@ -47,20 +50,20 @@ set(Boost_USE_STATIC_LIBS ON)
 set(Boost_NO_SYSTEM_PATHS ON)
 option(Boost_USE_STATIC_RUNTIME "Use static runtimes" ON)
 
-
 # --------------------------------------------------------
 # Set config of zkLLVM's Clang
-#set(Clang_DIR "${_THIRDPARTY_BUILD_DIR}/circifier/lib/cmake/clang/")
-#set(Clang_INCLUDE_DIR "${_THIRDPARTY_BUILD_DIR}/circifier/include/clang/")
-#find_package(Clang CONFIG REQUIRED)
-#include_directories(${Clang_INCLUDE_DIR})
+# set(Clang_DIR "${_THIRDPARTY_BUILD_DIR}/circifier/lib/cmake/clang/")
+# set(Clang_INCLUDE_DIR "${_THIRDPARTY_BUILD_DIR}/circifier/include/clang/")
+# find_package(Clang CONFIG REQUIRED)
+# include_directories(${Clang_INCLUDE_DIR})
 #
-#set(CMAKE_C_COMPILER "${_THIRDPARTY_BUILD_DIR}/circifier/bin/clang")
-#set(CMAKE_CXX_COMPILER "${_THIRDPARTY_BUILD_DIR}/circifier/bin/clang++")
+# set(CMAKE_C_COMPILER "${_THIRDPARTY_BUILD_DIR}/circifier/bin/clang")
+# set(CMAKE_CXX_COMPILER "${_THIRDPARTY_BUILD_DIR}/circifier/bin/clang++")
 
 # header only libraries must not be added here
 find_package(Boost REQUIRED COMPONENTS date_time filesystem random regex system thread log log_setup program_options)
 include_directories(${Boost_INCLUDE_DIRS})
+
 # --------------------------------------------------------
 # set config for crypto3
 option(BUILD_TESTS "Build tests" ON)
@@ -69,7 +72,6 @@ option(BUILD_APPS "Enable application targets." FALSE)
 option(BUILD_EXAMPLES "Enable demonstration targets." FALSE)
 option(BUILD_DOCS "Enable documentation targets." FALSE)
 set(DOXYGEN_OUTPUT_DIR "${CMAKE_CURRENT_LIST_DIR}/docs" CACHE STRING "Specify doxygen output directory")
-
 
 include_directories(
         "${CMAKE_CURRENT_LIST_DIR}/../include"
@@ -107,48 +109,79 @@ add_library(${PROJECT_NAME}
         # "${CMAKE_CURRENT_LIST_DIR}/src/SGGenerateProofs.cpp"
 )
 
-add_circuit(TransactionVerifierCircuit
-                SOURCES  ${CMAKE_CURRENT_LIST_DIR}/../src/circuits/TransactionVerifierCircuit.cpp
-                
-                INCLUDE_DIRECTORIES
-                "${CMAKE_CURRENT_LIST_DIR}/../include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/algebra/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/block/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/codec/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/containers/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/hash/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/kdf/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/mac/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/math/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/algebra/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/core/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/multiprecision/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/zk/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/modes/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/multiprecision/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/passhash/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/pbkdf/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/pkpad/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/pubkey/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/random/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/stream/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/threshold/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/vdf/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/zk/include"
+#add_circuit(TransactionVerifierCircuit
+#        SOURCES ${CMAKE_CURRENT_LIST_DIR}/../src/circuits/TransactionVerifierCircuit.cpp
+#
+#        INCLUDE_DIRECTORIES
+#        "${CMAKE_CURRENT_LIST_DIR}/../include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/algebra/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/block/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/codec/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/containers/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/hash/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/kdf/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/mac/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/math/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/algebra/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/core/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/multiprecision/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/zk/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/modes/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/multiprecision/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/passhash/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/pbkdf/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/pkpad/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/pubkey/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/random/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/stream/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/threshold/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/vdf/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/zk/include"
+#
+#        LINK_LIBRARIES
+#
+#        ${Boost_LIBRARIES})
+#add_circuit(ed25519_curve_mul
+#        SOURCES ${CMAKE_CURRENT_LIST_DIR}/../src/circuits/ed25519_curve_mul.cpp
+#
+#        INCLUDE_DIRECTORIES
+#        "${CMAKE_CURRENT_LIST_DIR}/../include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/algebra/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/block/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/codec/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/containers/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/hash/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/kdf/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/mac/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/math/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/algebra/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/core/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/multiprecision/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/zk/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/modes/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/multiprecision/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/passhash/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/pbkdf/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/pkpad/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/pubkey/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/random/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/stream/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/threshold/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/vdf/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/zk/include"
+#
+#        LINK_LIBRARIES
+#
+#        ${Boost_LIBRARIES})
 
-                LINK_LIBRARIES
-
-                ${Boost_LIBRARIES})
-
-#if(BUILD_TESTS)
-#        add_executable(${PROJECT_NAME}_test
-#                "${CMAKE_CURRENT_LIST_DIR}/../test/main_test.cpp"
-#                "${CMAKE_CURRENT_LIST_DIR}/../test/BitcoinKeyGenerator_test.cpp"
-#                "${CMAKE_CURRENT_LIST_DIR}/../test/EthereumKeyGenerator_test.cpp"
-#                "${CMAKE_CURRENT_LIST_DIR}/../test/ElGamalKeyGenerator_test.cpp"
-#                "${CMAKE_CURRENT_LIST_DIR}/../test/ECElGamalKeyGenerator_test.cpp"
-#                #"${CMAKE_CURRENT_LIST_DIR}/../test/KDFGenerator_test.cpp"
-#        )
-#        target_link_libraries(${PROJECT_NAME}_test PUBLIC ${PROJECT_NAME} GTest::gtest Boost::random)
-#endif()
-
+# if(BUILD_TESTS)
+#add_executable(${PROJECT_NAME}_test
+# "${CMAKE_CURRENT_LIST_DIR}/../test/TransactionVerfierCircuit_test.cpp"
+# "${CMAKE_CURRENT_LIST_DIR}/../test/BitcoinKeyGenerator_test.cpp"
+# "${CMAKE_CURRENT_LIST_DIR}/../test/EthereumKeyGenerator_test.cpp"
+# "${CMAKE_CURRENT_LIST_DIR}/../test/ElGamalKeyGenerator_test.cpp"
+# "${CMAKE_CURRENT_LIST_DIR}/../test/ECElGamalKeyGenerator_test.cpp"
+# #"${CMAKE_CURRENT_LIST_DIR}/../test/KDFGenerator_test.cpp"
+# )
+# target_link_libraries(${PROJECT_NAME}_test PUBLIC ${PROJECT_NAME} GTest::gtest )
+# endif()
