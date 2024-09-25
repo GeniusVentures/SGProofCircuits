@@ -1,13 +1,7 @@
-#include <nil/crypto3/algebra/curves/detail/pallas/types.hpp>
-#include <nil/crypto3/algebra/curves/pallas.hpp>
-#include <nil/crypto3/algebra/random_element.hpp>
-#include <array>
-#include <cstdint>
-#include <string>
-#include <iostream>
+
+#include "TransactionVerifierCircuit.hpp"
 
 using namespace nil::crypto3::algebra::curves;
-#define MAX_RANGES 4
 
 // Function to create a point on the curve from the seed and TOTP
 typename pallas::template g1_type<nil::crypto3::algebra::curves::coordinates::affine>::value_type GeneratePointFromSeedAndTotp(
