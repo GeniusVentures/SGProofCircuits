@@ -109,73 +109,43 @@ add_library(${PROJECT_NAME}
         # "${CMAKE_CURRENT_LIST_DIR}/src/SGGenerateProofs.cpp"
 )
 
-#add_circuit(TransactionVerifierCircuit
-#        SOURCES ${CMAKE_CURRENT_LIST_DIR}/../src/circuits/TransactionVerifierCircuit.cpp
-#
-#        INCLUDE_DIRECTORIES
-#        "${CMAKE_CURRENT_LIST_DIR}/../include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/algebra/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/block/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/codec/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/containers/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/hash/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/kdf/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/mac/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/math/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/algebra/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/core/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/multiprecision/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/zk/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/modes/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/multiprecision/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/passhash/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/pbkdf/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/pkpad/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/pubkey/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/random/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/stream/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/threshold/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/vdf/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/zk/include"
-#
-#        LINK_LIBRARIES
-#
-#        ${Boost_LIBRARIES})
-#add_circuit(ed25519_curve_mul
-#        SOURCES ${CMAKE_CURRENT_LIST_DIR}/../src/circuits/ed25519_curve_mul.cpp
-#
-#        INCLUDE_DIRECTORIES
-#        "${CMAKE_CURRENT_LIST_DIR}/../include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/algebra/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/block/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/codec/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/containers/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/hash/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/kdf/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/mac/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/math/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/algebra/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/core/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/multiprecision/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/zk/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/modes/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/multiprecision/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/passhash/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/pbkdf/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/pkpad/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/pubkey/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/random/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/stream/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/threshold/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/vdf/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/zk/include"
-#
-#        LINK_LIBRARIES
-#
-#        ${Boost_LIBRARIES})
+add_circuit(TransactionVerifierCircuit
+        SOURCES ${CMAKE_CURRENT_LIST_DIR}/../src/circuits/TransactionVerifierCircuit.cpp
+
+        INCLUDE_DIRECTORIES
+        "${CMAKE_CURRENT_LIST_DIR}/../include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/algebra/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/block/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/codec/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/containers/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/hash/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/kdf/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/mac/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/math/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/algebra/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/core/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/multiprecision/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/zk/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/modes/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/multiprecision/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/passhash/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/pbkdf/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/pkpad/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/pubkey/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/random/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/stream/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/threshold/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/vdf/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/zk/include"
+
+        LINK_LIBRARIES
+
+        ${Boost_LIBRARIES})
+
+add_dependencies(${PROJECT_NAME} TransactionVerifierCircuit)
 
 # if(BUILD_TESTS)
-#add_executable(${PROJECT_NAME}_test
+# add_executable(${PROJECT_NAME}_test
 # "${CMAKE_CURRENT_LIST_DIR}/../test/TransactionVerfierCircuit_test.cpp"
 # "${CMAKE_CURRENT_LIST_DIR}/../test/BitcoinKeyGenerator_test.cpp"
 # "${CMAKE_CURRENT_LIST_DIR}/../test/EthereumKeyGenerator_test.cpp"

@@ -58,14 +58,13 @@ endif()
 
 # --------------------------------------------------------
 # Set config of zkLLVM's Clang
-#set(Clang_DIR "${_THIRDPARTY_BUILD_DIR}/circifier/lib/cmake/clang/")
-#set(Clang_INCLUDE_DIR "${_THIRDPARTY_BUILD_DIR}/circifier/include/clang/")
-#find_package(Clang CONFIG REQUIRED)
-#include_directories(${Clang_INCLUDE_DIR})
+# set(Clang_DIR "${_THIRDPARTY_BUILD_DIR}/circifier/lib/cmake/clang/")
+# set(Clang_INCLUDE_DIR "${_THIRDPARTY_BUILD_DIR}/circifier/include/clang/")
+# find_package(Clang CONFIG REQUIRED)
+# include_directories(${Clang_INCLUDE_DIR})
 #
-#set(CMAKE_C_COMPILER "${_THIRDPARTY_BUILD_DIR}/circifier/bin/clang")
-#set(CMAKE_CXX_COMPILER "${_THIRDPARTY_BUILD_DIR}/circifier/bin/clang++")
-
+# set(CMAKE_C_COMPILER "${_THIRDPARTY_BUILD_DIR}/circifier/bin/clang")
+# set(CMAKE_CXX_COMPILER "${_THIRDPARTY_BUILD_DIR}/circifier/bin/clang++")
 
 # header only libraries must not be added here
 find_package(Boost REQUIRED COMPONENTS date_time filesystem random regex system thread log log_setup program_options)
@@ -112,44 +111,43 @@ add_library(${PROJECT_NAME}
 
         # "${CMAKE_CURRENT_LIST_DIR}/src/circuits/MPCVerifierCircuit.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/src/circuits/TransactionVerifierCircuit.cpp"
-        "${CMAKE_CURRENT_LIST_DIR}/src/circuits/TwoFactor.cpp"
-
         # "${CMAKE_CURRENT_LIST_DIR}/src/SGGenerateProofs.cpp"
 )
 
 add_circuit(TransactionVerifierCircuit
-                SOURCES  ${CMAKE_CURRENT_LIST_DIR}/src/circuits/TransactionVerifierCircuit.cpp
+        SOURCES ${CMAKE_CURRENT_LIST_DIR}/src/circuits/TransactionVerifierCircuit.cpp
 
-                INCLUDE_DIRECTORIES
-                "${CMAKE_CURRENT_LIST_DIR}/../include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/algebra/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/block/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/codec/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/containers/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/hash/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/kdf/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/mac/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/math/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/algebra/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/core/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/multiprecision/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/zk/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/modes/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/multiprecision/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/passhash/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/pbkdf/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/pkpad/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/pubkey/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/random/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/stream/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/threshold/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/vdf/include"
-                "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/zk/include"
+        INCLUDE_DIRECTORIES
+        "${CMAKE_CURRENT_LIST_DIR}/../include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/algebra/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/block/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/codec/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/containers/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/hash/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/kdf/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/mac/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/math/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/algebra/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/core/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/multiprecision/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/zk/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/modes/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/multiprecision/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/passhash/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/pbkdf/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/pkpad/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/pubkey/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/random/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/stream/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/threshold/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/vdf/include"
+        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/zk/include"
 
+        LINK_LIBRARIES
 
-                LINK_LIBRARIES
+        ${Boost_LIBRARIES})
 
-                ${Boost_LIBRARIES})
+add_dependencies(${PROJECT_NAME} TransactionVerifierCircuit)
 
 # Install Headers
 install(DIRECTORY "${CMAKE_SOURCE_DIR}/include/" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}" FILES_MATCHING PATTERN "*.h*")

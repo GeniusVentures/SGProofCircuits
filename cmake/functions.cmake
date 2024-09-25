@@ -135,14 +135,10 @@ function(add_circuit_no_stdlib name)
 
     foreach(source ${CIRCUIT_SOURCES})
         get_filename_component(source_base_name ${source} NAME)
-        set(compile_command "${CLANG} -target assigner -Xclang -fpreserve-vec3-type -Werror=unknown-attributes -D_LIBCPP_ENABLE_CXX17_REMOVED_UNARY_BINARY_FUNCTION
-        -D__ZKLLVM__ ${INCLUDE_DIRS_LIST} -emit-llvm -O1 -S ${ARG_COMPILER_OPTIONS}  -o ${name}_${source_base_name}.ll ${source}")
-        message(WARNING "The compilation command is:  ${compile_command}")
-
         add_custom_target(${name}_${source_base_name}_ll
                         COMMAND ${CLANG} -target assigner -Xclang -fpreserve-vec3-type -Werror=unknown-attributes -D_LIBCPP_ENABLE_CXX17_REMOVED_UNARY_BINARY_FUNCTION
                         -D__ZKLLVM__ ${INCLUDE_DIRS_LIST} -emit-llvm -O1 -S ${ARG_COMPILER_OPTIONS}  -o ${name}_${source_base_name}.ll ${source}
-
+                        COMMENT "Building ${circuit_name} circuit"
                         VERBATIM COMMAND_EXPAND_LISTS
 
                         SOURCES ${source})
@@ -170,6 +166,7 @@ function(add_circuit)
 
     add_custom_target(${circuit_name}
         COMMAND ${LINKER} ${link_options} -o ${circuit_name}.ll ${circuit_name}_no_stdlib.ll ${libc_stdlib} ${libcpp_stdlib}
+        COMMENT "Linking ${circuit_name} circuit"
         DEPENDS ${circuit_name}_no_stdlib
         VERBATIM COMMAND_EXPAND_LISTS)
 
