@@ -1,4 +1,4 @@
-
+include(${CMAKE_CURRENT_LIST_DIR}/functions.cmake)
 # BOOST VERSION TO USE
 set(BOOST_MAJOR_VERSION "1" CACHE STRING "Boost Major Version")
 set(BOOST_MINOR_VERSION "85" CACHE STRING "Boost Minor Version")
@@ -103,10 +103,16 @@ add_library(${PROJECT_NAME}
 
         # "${CMAKE_CURRENT_LIST_DIR}/src/circuits/MPCVerifierCircuit.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/../src/circuits/TransactionVerifierCircuit.cpp"
-        "${CMAKE_CURRENT_LIST_DIR}/../src/circuits/TwoFactor.cpp"
 
         # "${CMAKE_CURRENT_LIST_DIR}/src/SGGenerateProofs.cpp"
 )
+
+add_circuit(TransactionVerifierCircuit
+                SOURCES  ${CMAKE_CURRENT_LIST_DIR}/src/circuits/TransactionVerifierCircuit.cpp
+
+                LINK_LIBRARIES
+
+                ${Boost_LIBRARIES})
 
 #if(BUILD_TESTS)
 #        add_executable(${PROJECT_NAME}_test

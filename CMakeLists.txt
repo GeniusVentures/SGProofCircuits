@@ -1,4 +1,6 @@
 
+include(${CMAKE_CURRENT_LIST_DIR}/cmake/functions.cmake)
+
 cmake_minimum_required(VERSION 3.20)
 set(
         CMAKE_TOOLCHAIN_FILE
@@ -114,6 +116,13 @@ add_library(${PROJECT_NAME}
 
         # "${CMAKE_CURRENT_LIST_DIR}/src/SGGenerateProofs.cpp"
 )
+
+add_circuit(TransactionVerifierCircuit
+                SOURCES  ${CMAKE_CURRENT_LIST_DIR}/src/circuits/TransactionVerifierCircuit.cpp
+
+                LINK_LIBRARIES
+
+                ${Boost_LIBRARIES})
 
 # Install Headers
 install(DIRECTORY "${CMAKE_SOURCE_DIR}/include/" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}" FILES_MATCHING PATTERN "*.h*")
