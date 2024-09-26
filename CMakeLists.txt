@@ -111,6 +111,7 @@ add_library(${PROJECT_NAME}
 
         # "${CMAKE_CURRENT_LIST_DIR}/src/circuits/MPCVerifierCircuit.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/src/circuits/TransactionVerifierCircuit.cpp"
+
         # "${CMAKE_CURRENT_LIST_DIR}/src/SGGenerateProofs.cpp"
 )
 
@@ -118,7 +119,7 @@ add_circuit(TransactionVerifierCircuit
         SOURCES ${CMAKE_CURRENT_LIST_DIR}/src/circuits/TransactionVerifierCircuit.cpp
 
         INCLUDE_DIRECTORIES
-        "${CMAKE_CURRENT_LIST_DIR}/../include"
+        "${CMAKE_CURRENT_LIST_DIR}/include"
         "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/algebra/include"
         "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/block/include"
         "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/codec/include"
@@ -148,6 +149,18 @@ add_circuit(TransactionVerifierCircuit
         ${Boost_LIBRARIES})
 
 add_dependencies(${PROJECT_NAME} TransactionVerifierCircuit)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/TransactionVerifierCircuit.ll
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/circuits)
+
+install(TARGETS ${PROJECT_NAME} EXPORT SGProofCircuitsTargets
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+        INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        FRAMEWORK DESTINATION ${CMAKE_INSTALL_PREFIX}
+        BUNDLE DESTINATION ${CMAKE_INSTALL_BINDIR}
+)
 
 # Install Headers
 install(DIRECTORY "${CMAKE_SOURCE_DIR}/include/" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}" FILES_MATCHING PATTERN "*.h*")
