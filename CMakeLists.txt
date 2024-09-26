@@ -108,12 +108,9 @@ include_directories(
 
 add_library(${PROJECT_NAME}
         STATIC
-
-        # "${CMAKE_CURRENT_LIST_DIR}/src/circuits/MPCVerifierCircuit.cpp"
+        "${CMAKE_CURRENT_LIST_DIR}/src/circuits/MPCVerifierCircuit.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/src/circuits/TransactionVerifierCircuit.cpp"
 
-        # "${CMAKE_CURRENT_LIST_DIR}/src/SGGenerateProofs.cpp"
-)
 
 add_circuit(TransactionVerifierCircuit
         SOURCES ${CMAKE_CURRENT_LIST_DIR}/src/circuits/TransactionVerifierCircuit.cpp
