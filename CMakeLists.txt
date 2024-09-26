@@ -112,42 +112,42 @@ add_library(${PROJECT_NAME}
         "${CMAKE_CURRENT_LIST_DIR}/src/circuits/TransactionVerifierCircuit.cpp"
 )
 
-add_circuit(TransactionVerifierCircuit
-        SOURCES ${CMAKE_CURRENT_LIST_DIR}/src/circuits/TransactionVerifierCircuit.cpp
-
-        INCLUDE_DIRECTORIES
-        "${CMAKE_CURRENT_LIST_DIR}/include"
-        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/algebra/include"
-        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/block/include"
-        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/codec/include"
-        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/containers/include"
-        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/hash/include"
-        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/kdf/include"
-        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/mac/include"
-        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/math/include"
-        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/algebra/include"
-        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/core/include"
-        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/multiprecision/include"
-        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/zk/include"
-        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/modes/include"
-        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/multiprecision/include"
-        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/passhash/include"
-        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/pbkdf/include"
-        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/pkpad/include"
-        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/pubkey/include"
-        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/random/include"
-        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/stream/include"
-        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/threshold/include"
-        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/vdf/include"
-        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/zk/include"
-
-        LINK_LIBRARIES
-
-        ${Boost_LIBRARIES})
-
-add_dependencies(${PROJECT_NAME} TransactionVerifierCircuit)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/TransactionVerifierCircuit.ll
-    DESTINATION ${CMAKE_INSTALL_LIBDIR}/circuits)
+#add_circuit(TransactionVerifierCircuit
+#        SOURCES ${CMAKE_CURRENT_LIST_DIR}/src/circuits/TransactionVerifierCircuit.cpp
+#
+#        INCLUDE_DIRECTORIES
+#        "${CMAKE_CURRENT_LIST_DIR}/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/algebra/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/block/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/codec/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/containers/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/hash/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/kdf/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/mac/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/math/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/algebra/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/core/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/multiprecision/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/zk/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/modes/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/multiprecision/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/passhash/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/pbkdf/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/pkpad/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/pubkey/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/random/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/stream/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/threshold/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/vdf/include"
+#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/zk/include"
+#
+#        LINK_LIBRARIES
+#
+#        ${Boost_LIBRARIES})
+#
+#add_dependencies(${PROJECT_NAME} TransactionVerifierCircuit)
+#install(FILES ${CMAKE_CURRENT_BINARY_DIR}/TransactionVerifierCircuit.ll
+#    DESTINATION ${CMAKE_INSTALL_LIBDIR}/circuits)
 
 install(TARGETS ${PROJECT_NAME} EXPORT SGProofCircuitsTargets
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
