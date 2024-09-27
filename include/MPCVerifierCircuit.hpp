@@ -12,8 +12,8 @@ using namespace nil::crypto3::algebra::curves;
 // Function to validate the total aggregate against the expected total value
 [[circuit]] bool MPCValidateTransaction(
     [[private_input]] typename pallas::template g1_type<nil::crypto3::algebra::curves::coordinates::affine>::value_type total_random_sum, // Sum of all node random numbers
-    [[private_input]] typename pallas::base_field_type::value_type balance,
-    [[private_input]] typename pallas::base_field_type::value_type amount,
+    [[private_input]] typename pallas::scalar_field_type::value_type balance,
+    [[private_input]] typename pallas::scalar_field_type::value_type amount,
     typename pallas::template g1_type<nil::crypto3::algebra::curves::coordinates::affine>::value_type balance_commitment,
     typename pallas::template g1_type<nil::crypto3::algebra::curves::coordinates::affine>::value_type amount_commitment,
     typename pallas::template g1_type<nil::crypto3::algebra::curves::coordinates::affine>::value_type expected_new_balance_commitment,
