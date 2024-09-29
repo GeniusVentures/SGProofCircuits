@@ -30,18 +30,15 @@ typename pallas::template g1_type<nil::crypto3::algebra::curves::coordinates::af
     typename pallas::template g1_type<nil::crypto3::algebra::curves::coordinates::affine>::value_type expected_new_balance_commitment,
     const typename pallas::template g1_type<nil::crypto3::algebra::curves::coordinates::affine>::value_type& generator,
     std::array<typename pallas::scalar_field_type::value_type, MAX_RANGES> ranges, // Public parameter for upper bounds
-    uint64_t& output_range, // Output public variable for determined range
     [[private_input]] typename pallas::scalar_field_type::value_type base_seed, // Base seed for TOTP as a field element
     [[private_input]] typename pallas::scalar_field_type::value_type provided_totp // Provided TOTP to validate
 ) {
     // Initialize low bounds
     typename pallas::scalar_field_type::value_type lowBounds = 0;
-    output_range = MAX_RANGES; // Default to an invalid range
 
     // Determine the transfer amount range
     for (uint64_t i = 0; i < MAX_RANGES; i++) {
         if ((amount >= lowBounds) && (amount < ranges[i])) {
-            output_range = i; // Set the output range index
             break; // Exit loop once the range is found
         }
         lowBounds = ranges[i]; // Update low bounds for the next range check
