@@ -52,7 +52,6 @@ typename pallas::template g1_type<nil::crypto3::algebra::curves::coordinates::af
     //The
     auto calculated_balance_point = balance_scalar * generator;
     auto calculated_amount_point  = amount_scalar * generator;
-    //auto                                         calculated_balance_point = balance_scalar * generator;
 
     // Flag to determine if TOTP should be checked
     bool is_totp_valid = true; // Assume TOTP is valid if not checked
@@ -69,10 +68,11 @@ typename pallas::template g1_type<nil::crypto3::algebra::curves::coordinates::af
 
     if ( balance >= amount && is_totp_valid )
     {
-
+        //TODO - Circuits don't allow for subtraction of scalars or point multiplication for integers.
+        //auto new_balance = balance_scalar - amount_scalar;
         // Verify that the commitments match the expected values
-        bool valid_balance_commitment = ( calculated_balance_point == balance_commitment );
-        bool valid_amount_commitment  = ( calculated_amount_point == amount_commitment );
+        bool valid_balance_commitment     = ( calculated_balance_point == balance_commitment );
+        bool valid_amount_commitment      = ( calculated_amount_point == amount_commitment );
         //bool valid_new_balance_commitment = ( expected_new_balance_commitment == ( generator * new_balance ) );
         if ( valid_balance_commitment && valid_amount_commitment /* && valid_new_balance_commitment*/ )
         {
