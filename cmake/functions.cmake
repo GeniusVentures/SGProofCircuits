@@ -120,14 +120,14 @@ function(add_circuit_no_stdlib name)
         list(APPEND INCLUDE_DIRS_LIST "-I${include_dir}")
     endforeach()
 
-    list(APPEND INCLUDE_DIRS_LIST -I${_THIRDPARTY_BUILD_DIR}/stdlib/lib/c++/v1 -I${_THIRDPARTY_BUILD_DIR}/circifier/src/circifier-build/lib/clang/17/include/ -I${_THIRDPARTY_BUILD_DIR}/stdlib/lib/libc)
+    list(APPEND INCLUDE_DIRS_LIST -I${_THIRDPARTY_BUILD_DIR}/zkLLVM/include/lib/c++/v1 -I${_THIRDPARTY_BUILD_DIR}/zkLLVM/src/zkLLVM-build/libs/circifier/llvm/lib/clang/17/include/ -I${_THIRDPARTY_BUILD_DIR}/zkLLVM/include/lib/libc)
 
     list(REMOVE_DUPLICATES INCLUDE_DIRS_LIST)
 
     set(link_options "-S")
 
-    set(CLANG "${_THIRDPARTY_BUILD_DIR}/circifier/bin/clang")
-    set(LINKER "${_THIRDPARTY_BUILD_DIR}/circifier/bin/llvm-link")
+    set(CLANG "${_THIRDPARTY_BUILD_DIR}/zkLLVM/bin/clang")
+    set(LINKER "${_THIRDPARTY_BUILD_DIR}/zkLLVM/bin/llvm-link")
 
     # Compile sources
     set(compiler_outputs "")
@@ -159,9 +159,9 @@ function(add_circuit)
     list(PREPEND ARGV ${circuit_name}_no_stdlib)
     add_circuit_no_stdlib(${ARGV})
 
-    set(LINKER "${_THIRDPARTY_BUILD_DIR}/circifier/bin/llvm-link")
-    set(libc_stdlib ${_THIRDPARTY_BUILD_DIR}/stdlib/lib/zkllvm/zkllvm-libc.ll)
-    set(libcpp_stdlib ${_THIRDPARTY_BUILD_DIR}/stdlib/lib/zkllvm/zkllvm-libcpp.ll)
+    set(LINKER "${_THIRDPARTY_BUILD_DIR}/zkLLVM/bin/llvm-link")
+    set(libc_stdlib ${_THIRDPARTY_BUILD_DIR}/zkLLVM/lib/zkllvm/zkllvm-libc.ll)
+    set(libcpp_stdlib ${_THIRDPARTY_BUILD_DIR}/zkLLVM/lib/zkllvm/zkllvm-libcpp.ll)
     set(link_options "-S")
 
     add_custom_target(${circuit_name}
