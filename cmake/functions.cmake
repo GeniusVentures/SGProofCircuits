@@ -120,7 +120,7 @@ function(add_circuit_no_stdlib name)
         list(APPEND INCLUDE_DIRS_LIST "-I${include_dir}")
     endforeach()
 
-    list(APPEND INCLUDE_DIRS_LIST -I${_THIRDPARTY_BUILD_DIR}/zkLLVM/include/lib/c++/v1 -I${_THIRDPARTY_BUILD_DIR}/zkLLVM/src/zkLLVM-build/libs/circifier/llvm/lib/clang/17/include/ -I${_THIRDPARTY_BUILD_DIR}/zkLLVM/include/lib/libc)
+    list(APPEND INCLUDE_DIRS_LIST -I${_THIRDPARTY_BUILD_DIR}/zkLLVM/include/lib/c++/v1 -I${_THIRDPARTY_BUILD_DIR}/zkLLVM/include/lib/lib/clang/17/include -I${_THIRDPARTY_BUILD_DIR}/zkLLVM/include/lib/libc)
 
     list(REMOVE_DUPLICATES INCLUDE_DIRS_LIST)
 
