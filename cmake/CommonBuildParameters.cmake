@@ -163,6 +163,16 @@ add_circuit(TransactionVerifierCircuit
         LINK_LIBRARIES
         
         ${Boost_LIBRARIES})
+add_circuit(TransactionVerifierCircuitTOTP
+        SOURCES ${CMAKE_CURRENT_LIST_DIR}/../src/circuits/TransactionVerifierCircuitTOTP.cpp
+
+        INCLUDE_DIRECTORIES
+        "${CMAKE_CURRENT_LIST_DIR}/../include"
+        "${_THIRDPARTY_BUILD_DIR}/zkLLVM/include"        
+        LINK_LIBRARIES
+        
+        ${Boost_LIBRARIES})
+
 add_circuit(MPCVerifierCircuit
         SOURCES ${CMAKE_CURRENT_LIST_DIR}/../src/circuits/MPCVerifierCircuit.cpp
         
@@ -187,10 +197,11 @@ add_circuit(RecursiveTransactionCircuit
         ${Boost_LIBRARIES})
 
 
-add_dependencies(${PROJECT_NAME} TransactionVerifierCircuit MPCVerifierCircuit RecursiveTransactionCircuit)
+add_dependencies(${PROJECT_NAME} TransactionVerifierCircuit MPCVerifierCircuit RecursiveTransactionCircuit TransactionVerifierCircuitTOTP)
 
 install(FILES
         ${CMAKE_CURRENT_BINARY_DIR}/TransactionVerifierCircuit.ll
+        ${CMAKE_CURRENT_BINARY_DIR}/TransactionVerifierCircuitTOTP.ll
         ${CMAKE_CURRENT_BINARY_DIR}/MPCVerifierCircuit.ll
         ${CMAKE_CURRENT_BINARY_DIR}/RecursiveTransactionCircuit.ll
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/circuits)
