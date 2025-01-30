@@ -37,8 +37,7 @@ bool ValidateTransactionValues(
     typename pallas::template g1_type<nil::crypto3::algebra::curves::coordinates::affine>::value_type amount_commitment,               //
     typename pallas::template g1_type<nil::crypto3::algebra::curves::coordinates::affine>::value_type expected_new_balance_commitment, //
     typename pallas::template g1_type<nil::crypto3::algebra::curves::coordinates::affine>::value_type generator,                       //
-    std::array<pallas::scalar_field_type::value_type, MAX_RANGES>                                     ranges, // Public parameter for upper bounds
-    pallas::scalar_field_type::value_type base_seed,                                                          // Base seed for TOTP as a field element
+    std::array<pallas::scalar_field_type::value_type, MAX_RANGES>                                     ranges // Public parameter for upper bounds
 )
 {
     //TODO Arithmetic operations are not supported with scalar_field_type and curve multiplication is not supported with int

@@ -15,7 +15,7 @@ using namespace nil::crypto3::algebra::curves;
 
 
 /**
- * @brief       Validates the transaction
+ * @brief       Circuit that validates the transaction
  * @param[in]   balance The raw balance in integer form
  * @param[in]   amount The raw amount in integer form
  * @param[in]   balance_scalar The raw balance in scalar form
