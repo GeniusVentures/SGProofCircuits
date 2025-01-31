@@ -81,73 +81,59 @@ set(DOXYGEN_OUTPUT_DIR "${CMAKE_CURRENT_LIST_DIR}/docs" CACHE STRING "Specify do
 
 include_directories(
         "${CMAKE_CURRENT_LIST_DIR}/include"
-        "${ZKLLVM_DIR}/zkLLVM/libs/crypto3/libs/algebra/include"
-        "${ZKLLVM_DIR}/zkLLVM/libs/crypto3/libs/block/include"
-        "${ZKLLVM_DIR}/zkLLVM/libs/crypto3/libs/codec/include"
-        "${ZKLLVM_DIR}/zkLLVM/libs/crypto3/libs/containers/include"
-        "${ZKLLVM_DIR}/zkLLVM/libs/crypto3/libs/hash/include"
-        "${ZKLLVM_DIR}/zkLLVM/libs/crypto3/libs/kdf/include"
-        "${ZKLLVM_DIR}/zkLLVM/libs/crypto3/libs/mac/include"
-        "${ZKLLVM_DIR}/zkLLVM/libs/crypto3/libs/math/include"
-        "${ZKLLVM_DIR}/zkLLVM/libs/crypto3/libs/marshalling/algebra/include"
-        "${ZKLLVM_DIR}/zkLLVM/libs/crypto3/libs/marshalling/core/include"
-        "${ZKLLVM_DIR}/zkLLVM/libs/crypto3/libs/marshalling/multiprecision/include"
-        "${ZKLLVM_DIR}/zkLLVM/libs/crypto3/libs/marshalling/zk/include"
-        "${ZKLLVM_DIR}/zkLLVM/libs/crypto3/libs/modes/include"
-        "${ZKLLVM_DIR}/zkLLVM/libs/crypto3/libs/multiprecision/include"
-        "${ZKLLVM_DIR}/zkLLVM/libs/crypto3/libs/passhash/include"
-        "${ZKLLVM_DIR}/zkLLVM/libs/crypto3/libs/pbkdf/include"
-        "${ZKLLVM_DIR}/zkLLVM/libs/crypto3/libs/pkpad/include"
-        "${ZKLLVM_DIR}/zkLLVM/libs/crypto3/libs/pubkey/include"
-        "${ZKLLVM_DIR}/zkLLVM/libs/crypto3/libs/random/include"
-        "${ZKLLVM_DIR}/zkLLVM/libs/crypto3/libs/stream/include"
-        "${ZKLLVM_DIR}/zkLLVM/libs/crypto3/libs/threshold/include"
-        "${ZKLLVM_DIR}/zkLLVM/libs/crypto3/libs/vdf/include"
-        "${ZKLLVM_DIR}/zkLLVM/libs/crypto3/libs/zk/include"
 )
 
 add_library(${PROJECT_NAME}
         STATIC
         "${CMAKE_CURRENT_LIST_DIR}/src/circuits/MPCVerifierCircuit.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/src/circuits/TransactionVerifierCircuit.cpp"
+        "${CMAKE_CURRENT_LIST_DIR}/src/circuits/TransactionVerifierCircuitTOTP.cpp"
+        "${CMAKE_CURRENT_LIST_DIR}/src/circuits/TransactionValidator.cpp"
 )
 
-#add_circuit(TransactionVerifierCircuit
-#        SOURCES ${CMAKE_CURRENT_LIST_DIR}/src/circuits/TransactionVerifierCircuit.cpp
-#
-#        INCLUDE_DIRECTORIES
-#        "${CMAKE_CURRENT_LIST_DIR}/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/algebra/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/block/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/codec/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/containers/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/hash/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/kdf/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/mac/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/math/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/algebra/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/core/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/multiprecision/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/marshalling/zk/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/modes/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/multiprecision/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/passhash/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/pbkdf/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/pkpad/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/pubkey/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/random/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/stream/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/threshold/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/vdf/include"
-#        "${THIRDPARTY_DIR}/zkLLVM/libs/crypto3/libs/zk/include"
-#
-#        LINK_LIBRARIES
-#
-#        ${Boost_LIBRARIES})
-#
-#add_dependencies(${PROJECT_NAME} TransactionVerifierCircuit)
-#install(FILES ${CMAKE_CURRENT_BINARY_DIR}/TransactionVerifierCircuit.ll
-#    DESTINATION ${CMAKE_INSTALL_LIBDIR}/circuits)
+add_circuit(TransactionVerifierCircuit
+        SOURCES ${CMAKE_CURRENT_LIST_DIR}/src/circuits/TransactionVerifierCircuit.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/src/circuits/TransactionValidator.cpp
+
+        INCLUDE_DIRECTORIES
+        "${CMAKE_CURRENT_LIST_DIR}/include"
+        "${_THIRDPARTY_BUILD_DIR}/zkLLVM/include"
+        LINK_LIBRARIES
+
+        ${Boost_LIBRARIES})
+add_circuit(TransactionVerifierCircuitTOTP
+        SOURCES ${CMAKE_CURRENT_LIST_DIR}/src/circuits/TransactionVerifierCircuitTOTP.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/src/circuits/TransactionValidator.cpp
+
+        INCLUDE_DIRECTORIES
+        "${CMAKE_CURRENT_LIST_DIR}/include"
+        "${_THIRDPARTY_BUILD_DIR}/zkLLVM/include"
+        LINK_LIBRARIES
+
+        ${Boost_LIBRARIES})
+
+add_circuit(MPCVerifierCircuit
+        SOURCES ${CMAKE_CURRENT_LIST_DIR}/src/circuits/MPCVerifierCircuit.cpp
+
+        INCLUDE_DIRECTORIES
+        "${CMAKE_CURRENT_LIST_DIR}/include"
+        "${_THIRDPARTY_BUILD_DIR}/zkLLVM/include"
+
+        LINK_LIBRARIES
+
+        ${Boost_LIBRARIES})
+add_circuit(RecursiveTransactionCircuit
+        SOURCES ${CMAKE_CURRENT_LIST_DIR}/src/circuits/RecursiveTransactionCircuit.cpp
+
+        INCLUDE_DIRECTORIES
+        "${CMAKE_CURRENT_LIST_DIR}/include"
+        "${_THIRDPARTY_BUILD_DIR}/zkLLVM/include"
+
+        LINK_LIBRARIES
+
+        ${Boost_LIBRARIES})
+
+add_dependencies(${PROJECT_NAME} TransactionVerifierCircuit MPCVerifierCircuit RecursiveTransactionCircuit TransactionVerifierCircuitTOTP)
 
 install(TARGETS ${PROJECT_NAME} EXPORT SGProofCircuitsTargets
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -158,6 +144,13 @@ install(TARGETS ${PROJECT_NAME} EXPORT SGProofCircuitsTargets
         FRAMEWORK DESTINATION ${CMAKE_INSTALL_PREFIX}
         BUNDLE DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
+
+install(FILES
+        ${CMAKE_CURRENT_BINARY_DIR}/TransactionVerifierCircuit.ll
+        ${CMAKE_CURRENT_BINARY_DIR}/TransactionVerifierCircuitTOTP.ll
+        ${CMAKE_CURRENT_BINARY_DIR}/MPCVerifierCircuit.ll
+        ${CMAKE_CURRENT_BINARY_DIR}/RecursiveTransactionCircuit.ll
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/circuits)
 
 # Install Headers
 install(DIRECTORY "${CMAKE_SOURCE_DIR}/include/" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}" FILES_MATCHING PATTERN "*.h*")
