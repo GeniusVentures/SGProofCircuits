@@ -159,7 +159,16 @@ add_circuit(TransactionVerifierCircuit
 
         INCLUDE_DIRECTORIES
         "${CMAKE_CURRENT_LIST_DIR}/../include"
-        "${_THIRDPARTY_BUILD_DIR}/zkLLVM/include"        
+        "${ZKLLVM_DIR}/zkLLVM/include"
+        LINK_LIBRARIES
+
+        ${Boost_LIBRARIES})
+add_circuit(MPCVerifierCircuit
+        SOURCES ${CMAKE_CURRENT_LIST_DIR}/../src/circuits/MPCVerifierCircuit.cpp
+
+        INCLUDE_DIRECTORIES
+        "${CMAKE_CURRENT_LIST_DIR}/../include"
+        "${ZKLLVM_DIR}/zkLLVM/include"        
         LINK_LIBRARIES
         
         ${Boost_LIBRARIES})
@@ -168,7 +177,7 @@ add_circuit(TransactionVerifierCircuitTOTP
 
         INCLUDE_DIRECTORIES
         "${CMAKE_CURRENT_LIST_DIR}/../include"
-        "${_THIRDPARTY_BUILD_DIR}/zkLLVM/include"        
+        "${ZKLLVM_DIR}/zkLLVM/include"        
         LINK_LIBRARIES
         
         ${Boost_LIBRARIES})
@@ -178,7 +187,7 @@ add_circuit(MPCVerifierCircuit
         
         INCLUDE_DIRECTORIES
         "${CMAKE_CURRENT_LIST_DIR}/../include"
-        "${_THIRDPARTY_BUILD_DIR}/zkLLVM/include"
+        "${ZKLLVM_DIR}/zkLLVM/include"
 
 
         LINK_LIBRARIES
@@ -189,7 +198,7 @@ add_circuit(RecursiveTransactionCircuit
         
         INCLUDE_DIRECTORIES
         "${CMAKE_CURRENT_LIST_DIR}/../include"
-        "${_THIRDPARTY_BUILD_DIR}/zkLLVM/include"
+        "${ZKLLVM_DIR}/zkLLVM/include"
 
 
         LINK_LIBRARIES
