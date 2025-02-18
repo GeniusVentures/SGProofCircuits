@@ -169,7 +169,7 @@ function(add_circuit)
     set(link_options "-S")
 
     add_custom_target(${circuit_name}
-        COMMAND ${LINKER} ${link_options} -o ${circuit_name}.ll ${circuit_name}_no_stdlib.ll ${libc_stdlib} ${libcpp_stdlib}
+        COMMAND ${LINKER} ${link_options} ${SANITIZE_OPTIONS} -o ${circuit_name}.ll ${circuit_name}_no_stdlib.ll ${libc_stdlib} ${libcpp_stdlib}
         COMMENT "Linking ${circuit_name} circuit"
         DEPENDS ${circuit_name}_no_stdlib
         VERBATIM COMMAND_EXPAND_LISTS)
