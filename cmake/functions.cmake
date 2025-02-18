@@ -129,6 +129,10 @@ function(add_circuit_no_stdlib name)
     set(CLANG "${_THIRDPARTY_BUILD_DIR}/zkLLVM/bin/clang")
     set(LINKER "${_THIRDPARTY_BUILD_DIR}/zkLLVM/bin/llvm-link")
 
+    if (DEFINED SANITIZE_CODE)
+        set(SANITIZE_OPTIONS -fsanitize=${SANITIZE_CODE})
+    endif()
+
     # Compile sources
     set(compiler_outputs "")
     add_custom_target(${name}_compile_sources)
@@ -136,7 +140,7 @@ function(add_circuit_no_stdlib name)
     foreach(source ${CIRCUIT_SOURCES})
         get_filename_component(source_base_name ${source} NAME)
         add_custom_target(${name}_${source_base_name}_ll
-                        COMMAND ${CLANG} -target assigner -Xclang -fpreserve-vec3-type -Werror=unknown-attributes -D_LIBCPP_ENABLE_CXX17_REMOVED_UNARY_BINARY_FUNCTION
+                        COMMAND ${CLANG} -target assigner -Xclang ${SANITIZE_OPTIONS} -fpreserve-vec3-type -Werror=unknown-attributes -D_LIBCPP_ENABLE_CXX17_REMOVED_UNARY_BINARY_FUNCTION
                         -D__ZKLLVM__ ${INCLUDE_DIRS_LIST} -emit-llvm -O1 -S ${ARG_COMPILER_OPTIONS}  -o ${name}_${source_base_name}.ll ${source}
                         COMMENT "Building ${circuit_name} circuit"
                         VERBATIM COMMAND_EXPAND_LISTS
