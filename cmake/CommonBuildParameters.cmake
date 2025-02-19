@@ -163,15 +163,7 @@ add_circuit(TransactionVerifierCircuit
         LINK_LIBRARIES
 
         ${Boost_LIBRARIES})
-add_circuit(MPCVerifierCircuit
-        SOURCES ${CMAKE_CURRENT_LIST_DIR}/../src/circuits/MPCVerifierCircuit.cpp
 
-        INCLUDE_DIRECTORIES
-        "${CMAKE_CURRENT_LIST_DIR}/../include"
-        "${ZKLLVM_DIR}/zkLLVM/include"        
-        LINK_LIBRARIES
-        
-        ${Boost_LIBRARIES})
 add_circuit(TransactionVerifierCircuitTOTP
         SOURCES ${CMAKE_CURRENT_LIST_DIR}/../src/circuits/TransactionVerifierCircuitTOTP.cpp
 
