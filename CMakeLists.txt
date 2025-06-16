@@ -56,16 +56,6 @@ if(DEFINED USE_BOOST_INCLUDE_POSTFIX)
         set(BOOST_INCLUDE_POSTFIX "/boost-${BOOST_VERSION_2U}" CACHE STRING "Boost include postfix")
 endif()
 
-# --------------------------------------------------------
-# Set config of zkLLVM's Clang
-# set(Clang_DIR "${_THIRDPARTY_BUILD_DIR}/circifier/lib/cmake/clang/")
-# set(Clang_INCLUDE_DIR "${_THIRDPARTY_BUILD_DIR}/circifier/include/clang/")
-# find_package(Clang CONFIG REQUIRED)
-# include_directories(${Clang_INCLUDE_DIR})
-#
-# set(CMAKE_C_COMPILER "${_THIRDPARTY_BUILD_DIR}/circifier/bin/clang")
-# set(CMAKE_CXX_COMPILER "${_THIRDPARTY_BUILD_DIR}/circifier/bin/clang++")
-
 # header only libraries must not be added here
 find_package(Boost REQUIRED COMPONENTS date_time filesystem random regex system thread log log_setup program_options)
 include_directories(${Boost_INCLUDE_DIRS})
@@ -97,7 +87,7 @@ add_circuit(TransactionVerifierCircuit
 
         INCLUDE_DIRECTORIES
         "${CMAKE_CURRENT_LIST_DIR}/include"
-        "${_THIRDPARTY_BUILD_DIR}/zkLLVM/include"
+        "${ZKLLVM_BUILD_DIR}/zkLLVM/include"
         LINK_LIBRARIES
 
         ${Boost_LIBRARIES})
@@ -107,7 +97,7 @@ add_circuit(TransactionVerifierCircuitTOTP
 
         INCLUDE_DIRECTORIES
         "${CMAKE_CURRENT_LIST_DIR}/include"
-        "${_THIRDPARTY_BUILD_DIR}/zkLLVM/include"
+        "${ZKLLVM_BUILD_DIR}/zkLLVM/include"
         LINK_LIBRARIES
 
         ${Boost_LIBRARIES})
@@ -117,7 +107,7 @@ add_circuit(MPCVerifierCircuit
 
         INCLUDE_DIRECTORIES
         "${CMAKE_CURRENT_LIST_DIR}/include"
-        "${_THIRDPARTY_BUILD_DIR}/zkLLVM/include"
+        "${ZKLLVM_BUILD_DIR}/zkLLVM/include"
 
         LINK_LIBRARIES
 
@@ -127,7 +117,7 @@ add_circuit(RecursiveTransactionCircuit
 
         INCLUDE_DIRECTORIES
         "${CMAKE_CURRENT_LIST_DIR}/include"
-        "${_THIRDPARTY_BUILD_DIR}/zkLLVM/include"
+        "${ZKLLVM_BUILD_DIR}/zkLLVM/include"
 
         LINK_LIBRARIES
 

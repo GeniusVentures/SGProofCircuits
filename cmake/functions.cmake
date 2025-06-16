@@ -120,14 +120,14 @@ function(add_circuit_no_stdlib name)
         list(APPEND INCLUDE_DIRS_LIST "-I${include_dir}")
     endforeach()
 
-    list(APPEND INCLUDE_DIRS_LIST -I${ZKLLVM_DIR}/zkLLVM/include/lib/c++/v1 -I${ZKLLVM_DIR}/zkLLVM/include/lib/clang/17/include -I${ZKLLVM_DIR}/zkLLVM/include/lib/libc)
+    list(APPEND INCLUDE_DIRS_LIST -I${ZKLLVM_BUILD_DIR}/zkLLVM/include/lib/c++/v1 -I${ZKLLVM_BUILD_DIR}/zkLLVM/include/lib/clang/17/include -I${ZKLLVM_BUILD_DIR}/zkLLVM/include/lib/libc)
 
     list(REMOVE_DUPLICATES INCLUDE_DIRS_LIST)
 
     set(link_options "-S")
 
-    set(CLANG "${ZKLLVM_DIR}/zkLLVM/bin/clang")
-    set(LINKER "${ZKLLVM_DIR}/zkLLVM/bin/llvm-link")
+    set(CLANG "${ZKLLVM_BUILD_DIR}/zkLLVM/bin/clang")
+    set(LINKER "${ZKLLVM_BUILD_DIR}/zkLLVM/bin/llvm-link")
 
 
     # Compile sources
@@ -160,9 +160,9 @@ function(add_circuit)
     list(PREPEND ARGV ${circuit_name}_no_stdlib)
     add_circuit_no_stdlib(${ARGV})
 
-    set(LINKER "${ZKLLVM_DIR}/zkLLVM/bin/llvm-link")
-    set(libc_stdlib ${ZKLLVM_DIR}/zkLLVM/lib/zkllvm/zkllvm-libc.ll)
-    set(libcpp_stdlib ${ZKLLVM_DIR}/zkLLVM/lib/zkllvm/zkllvm-libcpp.ll)
+    set(LINKER "${ZKLLVM_BUILD_DIR}/zkLLVM/bin/llvm-link")
+    set(libc_stdlib ${ZKLLVM_BUILD_DIR}/zkLLVM/lib/zkllvm/zkllvm-libc.ll)
+    set(libcpp_stdlib ${ZKLLVM_BUILD_DIR}/zkLLVM/lib/zkllvm/zkllvm-libcpp.ll)
     set(link_options "-S")
 
     add_custom_target(${circuit_name}
