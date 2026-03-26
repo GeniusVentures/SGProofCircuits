@@ -65,7 +65,7 @@ include_directories(${Boost_INCLUDE_DIRS})
 
 # --------------------------------------------------------
 # set config for crypto3
-option(BUILD_TESTS "Build tests" ON)
+option(BUILD_TESTING "Build tests" OFF)
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 option(BUILD_APPS "Enable application targets." FALSE)
 option(BUILD_EXAMPLES "Enable demonstration targets." FALSE)
@@ -207,14 +207,3 @@ install(FILES
         ${CMAKE_CURRENT_BINARY_DIR}/RecursiveTransactionCircuit.ll
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/circuits)
 
-# if(BUILD_TESTS)
-# add_executable(${PROJECT_NAME}_test
-# "${CMAKE_CURRENT_LIST_DIR}/../test/TransactionVerfierCircuit_test.cpp"
-# "${CMAKE_CURRENT_LIST_DIR}/../test/BitcoinKeyGenerator_test.cpp"
-# "${CMAKE_CURRENT_LIST_DIR}/../test/EthereumKeyGenerator_test.cpp"
-# "${CMAKE_CURRENT_LIST_DIR}/../test/ElGamalKeyGenerator_test.cpp"
-# "${CMAKE_CURRENT_LIST_DIR}/../test/ECElGamalKeyGenerator_test.cpp"
-# #"${CMAKE_CURRENT_LIST_DIR}/../test/KDFGenerator_test.cpp"
-# )
-# target_link_libraries(${PROJECT_NAME}_test PUBLIC ${PROJECT_NAME} GTest::gtest )
-# endif()

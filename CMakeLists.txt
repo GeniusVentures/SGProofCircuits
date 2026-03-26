@@ -36,7 +36,7 @@ set(VERSION_STRING 0)
 set(SUBVERSION_STRING 1)
 
 # Set source file dir
-option(BUILD_TESTS "Build tests" ON)
+option(BUILD_TESTING "Build tests" ON)
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 option(BUILD_APPS "Enable application targets." FALSE)
 option(BUILD_EXAMPLES "Enable demonstration targets." FALSE)
@@ -60,14 +60,7 @@ endif()
 find_package(Boost REQUIRED COMPONENTS date_time filesystem random regex system thread log log_setup program_options)
 include_directories(${Boost_INCLUDE_DIRS})
 
-# --------------------------------------------------------
-# set config for crypto3
-option(BUILD_TESTS "Build tests" ON)
-option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
-option(BUILD_APPS "Enable application targets." FALSE)
-option(BUILD_EXAMPLES "Enable demonstration targets." FALSE)
-option(BUILD_DOCS "Enable documentation targets." FALSE)
-set(DOXYGEN_OUTPUT_DIR "${CMAKE_CURRENT_LIST_DIR}/docs" CACHE STRING "Specify doxygen output directory")
+set(CMAKE_INSTALL_INCLUDEDIR "${CMAKE_INSTALL_INCLUDEDIR}/SGProofCircuits")
 
 include_directories(
         "${CMAKE_CURRENT_LIST_DIR}/include"
@@ -143,7 +136,10 @@ install(FILES
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/circuits)
 
 # Install Headers
-install(DIRECTORY "${CMAKE_SOURCE_DIR}/include/" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}" FILES_MATCHING PATTERN "*.h*")
+install(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/include/
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        FILES_MATCHING PATTERN "*.h*"
+)
 
 # Install Targets
 set(SGProofCircuits_CONFIG_DESTINATION_DIR "lib/cmake/SGProofCircuits")
@@ -171,18 +167,8 @@ write_basic_package_version_file(
 
 # install the configuration file
 install(FILES
+        ${CMAKE_CURRENT_BINARY_DIR}/SGProofCircuitsConfigVersion.cmake
         ${CMAKE_CURRENT_BINARY_DIR}/SGProofCircuitsConfig.cmake
         DESTINATION ${SGProofCircuits_CONFIG_DESTINATION_DIR}
 )
 
-# if(BUILD_TESTS)
-# add_executable(${PROJECT_NAME}_test
-# "${CMAKE_CURRENT_LIST_DIR}/../test/main_test.cpp"
-# "${CMAKE_CURRENT_LIST_DIR}/../test/BitcoinKeyGenerator_test.cpp"
-# "${CMAKE_CURRENT_LIST_DIR}/../test/EthereumKeyGenerator_test.cpp"
-# "${CMAKE_CURRENT_LIST_DIR}/../test/ElGamalKeyGenerator_test.cpp"
-# "${CMAKE_CURRENT_LIST_DIR}/../test/ECElGamalKeyGenerator_test.cpp"
-# #"${CMAKE_CURRENT_LIST_DIR}/../test/KDFGenerator_test.cpp"
-# )
-# target_link_libraries(${PROJECT_NAME}_test PUBLIC ${PROJECT_NAME} GTest::gtest Boost::random)
-# endif()
